@@ -31,7 +31,7 @@
             this.tabPage1 = new ReaLTaiizor.Controls.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.thunderGroupBox2 = new ReaLTaiizor.Controls.ThunderGroupBox();
+            this.infoGroupBox = new ReaLTaiizor.Controls.ThunderGroupBox();
             this.cmb_genere = new ReaLTaiizor.Controls.ComboBoxEdit();
             this.foxLabel2 = new ReaLTaiizor.Controls.FoxLabel();
             this.foxLabel1 = new ReaLTaiizor.Controls.FoxLabel();
@@ -58,7 +58,7 @@
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.thunderGroupBox2.SuspendLayout();
+            this.infoGroupBox.SuspendLayout();
             this.thunderGroupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -98,11 +98,11 @@
             // 
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(63)))), ((int)(((byte)(74)))));
             this.tabPage2.Controls.Add(this.dataGridView1);
-            this.tabPage2.Controls.Add(this.thunderGroupBox2);
+            this.tabPage2.Controls.Add(this.infoGroupBox);
             this.tabPage2.Controls.Add(this.thunderGroupBox1);
             this.tabPage2.Location = new System.Drawing.Point(139, 4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabPage2.Size = new System.Drawing.Size(770, 533);
             this.tabPage2.TabIndex = 0;
             this.tabPage2.Text = "Home";
@@ -112,41 +112,44 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(28, 15);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.Size = new System.Drawing.Size(728, 172);
             this.dataGridView1.TabIndex = 2;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
-            // thunderGroupBox2
+            // infoGroupBox
             // 
-            this.thunderGroupBox2.BackColor = System.Drawing.Color.Transparent;
-            this.thunderGroupBox2.BodyColorA = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
-            this.thunderGroupBox2.BodyColorB = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.thunderGroupBox2.BodyColorC = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.thunderGroupBox2.BodyColorD = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(58)))));
-            this.thunderGroupBox2.Controls.Add(this.cmb_genere);
-            this.thunderGroupBox2.Controls.Add(this.foxLabel2);
-            this.thunderGroupBox2.Controls.Add(this.foxLabel1);
-            this.thunderGroupBox2.Controls.Add(this.input_mDurata);
-            this.thunderGroupBox2.Controls.Add(this.input_hDurata);
-            this.thunderGroupBox2.Controls.Add(this.date_dataUscita);
-            this.thunderGroupBox2.Controls.Add(this.input_trama);
-            this.thunderGroupBox2.Controls.Add(this.input_nome);
-            this.thunderGroupBox2.Controls.Add(this.input_id);
-            this.thunderGroupBox2.Controls.Add(this.btn_annulla);
-            this.thunderGroupBox2.Controls.Add(this.btn_salva);
-            this.thunderGroupBox2.Controls.Add(this.headerLabel6);
-            this.thunderGroupBox2.Controls.Add(this.headerLabel5);
-            this.thunderGroupBox2.Controls.Add(this.headerLabel4);
-            this.thunderGroupBox2.Controls.Add(this.headerLabel3);
-            this.thunderGroupBox2.Controls.Add(this.headerLabel2);
-            this.thunderGroupBox2.Controls.Add(this.headerLabel1);
-            this.thunderGroupBox2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.thunderGroupBox2.Location = new System.Drawing.Point(343, 203);
-            this.thunderGroupBox2.Name = "thunderGroupBox2";
-            this.thunderGroupBox2.Size = new System.Drawing.Size(413, 320);
-            this.thunderGroupBox2.TabIndex = 1;
-            this.thunderGroupBox2.Text = "Info";
-            this.thunderGroupBox2.Click += new System.EventHandler(this.thunderGroupBox2_Click);
+            this.infoGroupBox.BackColor = System.Drawing.Color.Transparent;
+            this.infoGroupBox.BodyColorA = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+            this.infoGroupBox.BodyColorB = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.infoGroupBox.BodyColorC = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.infoGroupBox.BodyColorD = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(58)))));
+            this.infoGroupBox.Controls.Add(this.cmb_genere);
+            this.infoGroupBox.Controls.Add(this.foxLabel2);
+            this.infoGroupBox.Controls.Add(this.foxLabel1);
+            this.infoGroupBox.Controls.Add(this.input_mDurata);
+            this.infoGroupBox.Controls.Add(this.input_hDurata);
+            this.infoGroupBox.Controls.Add(this.date_dataUscita);
+            this.infoGroupBox.Controls.Add(this.input_trama);
+            this.infoGroupBox.Controls.Add(this.input_nome);
+            this.infoGroupBox.Controls.Add(this.input_id);
+            this.infoGroupBox.Controls.Add(this.btn_annulla);
+            this.infoGroupBox.Controls.Add(this.btn_salva);
+            this.infoGroupBox.Controls.Add(this.headerLabel6);
+            this.infoGroupBox.Controls.Add(this.headerLabel5);
+            this.infoGroupBox.Controls.Add(this.headerLabel4);
+            this.infoGroupBox.Controls.Add(this.headerLabel3);
+            this.infoGroupBox.Controls.Add(this.headerLabel2);
+            this.infoGroupBox.Controls.Add(this.headerLabel1);
+            this.infoGroupBox.Enabled = false;
+            this.infoGroupBox.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.infoGroupBox.Location = new System.Drawing.Point(343, 203);
+            this.infoGroupBox.Name = "infoGroupBox";
+            this.infoGroupBox.Size = new System.Drawing.Size(413, 320);
+            this.infoGroupBox.TabIndex = 1;
+            this.infoGroupBox.Text = "Info";
+            this.infoGroupBox.Click += new System.EventHandler(this.thunderGroupBox2_Click);
             // 
             // cmb_genere
             // 
@@ -205,7 +208,7 @@
             this.input_mDurata.Location = new System.Drawing.Point(294, 145);
             this.input_mDurata.Maximum = ((long)(100));
             this.input_mDurata.Minimum = ((long)(0));
-            this.input_mDurata.MinimumSize = new System.Drawing.Size(93, 28);
+            this.input_mDurata.MinimumSize = new System.Drawing.Size(70, 23);
             this.input_mDurata.Name = "input_mDurata";
             this.input_mDurata.Size = new System.Drawing.Size(93, 28);
             this.input_mDurata.TabIndex = 13;
@@ -227,7 +230,7 @@
             this.input_hDurata.Location = new System.Drawing.Point(157, 145);
             this.input_hDurata.Maximum = ((long)(100));
             this.input_hDurata.Minimum = ((long)(0));
-            this.input_hDurata.MinimumSize = new System.Drawing.Size(93, 28);
+            this.input_hDurata.MinimumSize = new System.Drawing.Size(70, 23);
             this.input_hDurata.Name = "input_hDurata";
             this.input_hDurata.Size = new System.Drawing.Size(93, 28);
             this.input_hDurata.TabIndex = 12;
@@ -241,7 +244,7 @@
             this.date_dataUscita.Location = new System.Drawing.Point(132, 187);
             this.date_dataUscita.MinimumSize = new System.Drawing.Size(0, 29);
             this.date_dataUscita.Name = "date_dataUscita";
-            this.date_dataUscita.Size = new System.Drawing.Size(255, 29);
+            this.date_dataUscita.Size = new System.Drawing.Size(255, 30);
             this.date_dataUscita.TabIndex = 10;
             this.date_dataUscita.ValueChanged += new System.EventHandler(this.date_dataUscita_ValueChanged);
             // 
@@ -282,7 +285,7 @@
             // input_id
             // 
             this.input_id.BackColor = System.Drawing.Color.Transparent;
-            this.input_id.EnabledCalc = true;
+            this.input_id.EnabledCalc = false;
             this.input_id.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.input_id.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(133)))), ((int)(((byte)(142)))));
             this.input_id.Location = new System.Drawing.Point(132, 36);
@@ -435,6 +438,7 @@
             this.btn_esci.TabIndex = 3;
             this.btn_esci.Text = "Esci";
             this.btn_esci.Transparent = false;
+            this.btn_esci.Click += new System.EventHandler(this.btn_esci_Click);
             // 
             // btn_nuovoFilm
             // 
@@ -449,6 +453,7 @@
             this.btn_nuovoFilm.TabIndex = 2;
             this.btn_nuovoFilm.Text = "Nuovo film";
             this.btn_nuovoFilm.Transparent = false;
+            this.btn_nuovoFilm.Click += new System.EventHandler(this.btn_nuovoFilm_Click);
             // 
             // btn_elimina
             // 
@@ -463,6 +468,7 @@
             this.btn_elimina.TabIndex = 1;
             this.btn_elimina.Text = "Elimina";
             this.btn_elimina.Transparent = false;
+            this.btn_elimina.Click += new System.EventHandler(this.btn_elimina_Click);
             // 
             // btn_modifica
             // 
@@ -477,13 +483,14 @@
             this.btn_modifica.TabIndex = 0;
             this.btn_modifica.Text = "Modifica";
             this.btn_modifica.Transparent = false;
+            this.btn_modifica.Click += new System.EventHandler(this.btn_modifica_Click);
             // 
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(63)))), ((int)(((byte)(74)))));
             this.tabPage3.Location = new System.Drawing.Point(139, 4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabPage3.Size = new System.Drawing.Size(770, 533);
             this.tabPage3.TabIndex = 1;
             this.tabPage3.Text = "Attori";
@@ -500,8 +507,8 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.thunderGroupBox2.ResumeLayout(false);
-            this.thunderGroupBox2.PerformLayout();
+            this.infoGroupBox.ResumeLayout(false);
+            this.infoGroupBox.PerformLayout();
             this.thunderGroupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -512,7 +519,7 @@
         private ReaLTaiizor.Controls.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private ReaLTaiizor.Controls.ThunderGroupBox thunderGroupBox2;
+        private ReaLTaiizor.Controls.ThunderGroupBox infoGroupBox;
         private ReaLTaiizor.Controls.ThunderGroupBox thunderGroupBox1;
         private ReaLTaiizor.Controls.AirButton btn_esci;
         private ReaLTaiizor.Controls.AirButton btn_nuovoFilm;
