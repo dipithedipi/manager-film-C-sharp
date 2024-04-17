@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Common;
 using ReaLTaiizor.Controls;
 using System;
 using System.Collections.Generic;
@@ -56,6 +57,7 @@ namespace manager_film
             } finally {
                 connection.Close();
             }
+
         }
 
         public string GenderText(int id)
@@ -82,6 +84,66 @@ namespace manager_film
             } catch (Exception ex) {
                 MessageBox.Show("Error: " + ex.Message);
             } finally {
+                connection.Close();
+            }
+
+            try
+            {
+                connection.Open();
+                string query = "SELECT * FROM generi";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                System.Data.DataTable dataTable = new System.Data.DataTable();
+                adapter.Fill(dataTable);
+                dataGridViewGeneri.DataSource = dataTable;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            try
+            {
+                connection.Open();
+                string query = "SELECT * FROM attori";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                System.Data.DataTable dataTable = new System.Data.DataTable();
+                adapter.Fill(dataTable);
+                dataGridViewAttori.DataSource = dataTable;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            try
+            {
+                connection.Open();
+                string query = "SELECT * FROM recitare";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                System.Data.DataTable dataTable = new System.Data.DataTable();
+                adapter.Fill(dataTable);
+                dataGridViewRelazioni.DataSource = dataTable;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
                 connection.Close();
             }
         }
@@ -261,7 +323,7 @@ namespace manager_film
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 int idFilmToDelete = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id_film"].Value);
-
+                
                 DialogResult result = MessageBox.Show($"Sei sicuro di voler eliminare il film {idFilmToDelete}?", "Elimina", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
@@ -305,6 +367,210 @@ namespace manager_film
         {
             Form2 form2 = new Form2(this);
             form2.Show();
+        }
+
+        private void dataGridViewGeneri_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridViewGeneri_SelectionChanged(object sender, EventArgs e)
+        {
+            input_id_genere_modifica.Text = string.Empty;
+            input_nome_genere_modifica.Text = string.Empty;
+            input_descrizione_genere_modifica.Text = string.Empty;
+
+            if (dataGridViewGeneri.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridViewGeneri.SelectedRows[0];
+
+                int id = int.Parse(selectedRow.Cells["id_genere"].Value.ToString());
+                string nome = selectedRow.Cells["nome"].Value.ToString();
+                string descrizione = selectedRow.Cells["descrizione"].Value.ToString();
+
+                input_id_genere_modifica.Text = id.ToString();
+                input_nome_genere_modifica.Text = nome.ToString();
+                input_descrizione_genere_modifica.Text = descrizione.ToString();
+            }
+        }
+
+        private void airButton1_Click(object sender, EventArgs e)
+        {
+            thunderGroupBox2.Enabled = false;
+        }
+
+        private void airButton2_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewGeneri.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridViewGeneri.SelectedRows[0];
+
+                string id = input_id_genere_modifica.Text;
+                string nome = input_nome_genere_modifica.Text;
+                string descrizione = input_descrizione_genere_modifica.Text;
+
+                selectedRow.Cells["id_genere"].Value = id;
+                selectedRow.Cells["nome"].Value = nome;
+                selectedRow.Cells["descrizione"].Value = descrizione;
+
+                string updateQuery = "UPDATE generi SET nome = @nome, descrizione = @descrizione WHERE id_genere = @id_genere";
+
+
+                using (MySqlCommand cmd = new MySqlCommand(updateQuery, connection))
+                {
+                    cmd.Parameters.AddWithValue("@nome", nome);
+                    cmd.Parameters.AddWithValue("@descrizione", descrizione);
+                    cmd.Parameters.AddWithValue("@id_genere", id);
+                    if (connection.State != ConnectionState.Open) connection.Open();
+                    cmd.ExecuteNonQuery();
+                }
+
+                MessageBox.Show("Complete", "Update");
+                connection.Clone();
+            }
+
+            thunderGroupBox2.Enabled = false;
+        }
+
+        private void airButton6_Click(object sender, EventArgs e)
+        {
+            thunderGroupBox2.Enabled=true;
+        }
+
+        private void airButton3_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void airButton5_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void airButton5_Click_1(object sender, EventArgs e)
+        {
+            if (dataGridViewGeneri.SelectedRows.Count > 0)
+            {
+                int idToDelete = Convert.ToInt32(dataGridViewGeneri.SelectedRows[0].Cells["id_genere"].Value);
+
+                DialogResult result = MessageBox.Show($"Sei sicuro di voler eliminare il genere {idToDelete}?", "Elimina", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    string deleteQuery = "DELETE recitare FROM recitare INNER JOIN film ON recitare.id_film = film.id_film WHERE film.id_genere = @id_genere;";
+                    using (MySqlCommand cmd = new MySqlCommand(deleteQuery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@id_genere", idToDelete);
+                        if (connection.State != ConnectionState.Open) connection.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+
+                     deleteQuery = "DELETE FROM film WHERE id_genere = @id_genere";
+                    using (MySqlCommand cmd = new MySqlCommand(deleteQuery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@id_genere", idToDelete);
+                        if (connection.State != ConnectionState.Open) connection.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    deleteQuery = "DELETE FROM generi WHERE id_genere = @id_genere";
+                    using (MySqlCommand cmd = new MySqlCommand(deleteQuery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@id_genere", idToDelete);
+                        if (connection.State != ConnectionState.Open) connection.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+
+
+                    dataGridViewGeneri.Rows.RemoveAt(dataGridViewGeneri.SelectedRows[0].Index);
+
+                    MessageBox.Show("Il genere è stato eliminato con successo.", "Eliminazione Completata", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    connection.Close();
+                }
+            }
+            else
+            {
+                // Nessuna riga selezionata, mostra un messaggio all'utente
+                MessageBox.Show("Seleziona un genere da eliminare.", "Nessuna Selezione", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void headerLabel24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void airButton9_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void airButton15_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void dataGridViewAttori_SelectionChanged(object sender, EventArgs e)
+        {
+            aloneTextBox6.Text = string.Empty;
+            aloneTextBox5.Text = string.Empty;
+            aloneTextBox4.Text = string.Empty;
+            poisonDateTime1.Value = DateTime.Now;
+
+            if (dataGridViewAttori.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridViewAttori.SelectedRows[0];
+
+                int id = int.Parse(selectedRow.Cells["id_attore"].Value.ToString());
+                string nome = selectedRow.Cells["nome"].Value.ToString();
+                string cognome = selectedRow.Cells["cognome"].Value.ToString();
+                string nascita = selectedRow.Cells["data_nascita"].Value.ToString();
+
+                aloneTextBox6.Text = id.ToString();
+                aloneTextBox5.Text = nome.ToString();
+                aloneTextBox4.Text = cognome.ToString();
+                poisonDateTime1.Value = DateTime.Parse(nascita);
+            }
+        }
+
+        private void dataGridViewRelazioni_SelectionChanged(object sender, EventArgs e)
+        {
+            aloneTextBox9.Text = string.Empty;
+            aloneTextBox8.Text = string.Empty;
+            aloneTextBox7.Text = string.Empty;
+
+            if (dataGridViewRelazioni.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridViewRelazioni.SelectedRows[0];
+
+                string id_attore = selectedRow.Cells["id_attore"].Value.ToString();
+                string id_film = selectedRow.Cells["id_film"].Value.ToString();
+                string ruolo = selectedRow.Cells["ruolo"].Value.ToString();
+
+                aloneTextBox9.Text = id_attore.ToString();
+                aloneTextBox8.Text = id_film.ToString();
+                aloneTextBox7.Text = ruolo.ToString();
+            }
+        }
+
+        private void airButton12_Click(object sender, EventArgs e)
+        {
+            thunderGroupBox4.Enabled = true;
+        }
+
+        private void airButton7_Click(object sender, EventArgs e)
+        {
+            thunderGroupBox4.Enabled=false;
+        }
+
+        private void airButton18_Click(object sender, EventArgs e)
+        {
+            thunderGroupBox6.Enabled = true;
+        }
+
+        private void airButton13_Click(object sender, EventArgs e)
+        {
+            thunderGroupBox6.Enabled=false;
         }
     }
 }
