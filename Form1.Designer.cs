@@ -90,9 +90,9 @@
             this.dataGridViewAttori = new System.Windows.Forms.DataGridView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.thunderGroupBox6 = new ReaLTaiizor.Controls.ThunderGroupBox();
-            this.aloneTextBox7 = new ReaLTaiizor.Controls.AloneTextBox();
-            this.aloneTextBox8 = new ReaLTaiizor.Controls.AloneTextBox();
-            this.aloneTextBox9 = new ReaLTaiizor.Controls.AloneTextBox();
+            this.cmb_id_attore_relazione = new ReaLTaiizor.Controls.ComboBoxEdit();
+            this.cmb_id_film_relazione = new ReaLTaiizor.Controls.ComboBoxEdit();
+            this.input_ruolo_relazione = new ReaLTaiizor.Controls.AloneTextBox();
             this.airButton13 = new ReaLTaiizor.Controls.AirButton();
             this.airButton14 = new ReaLTaiizor.Controls.AirButton();
             this.headerLabel22 = new ReaLTaiizor.Controls.HeaderLabel();
@@ -100,8 +100,6 @@
             this.headerLabel24 = new ReaLTaiizor.Controls.HeaderLabel();
             this.thunderGroupBox7 = new ReaLTaiizor.Controls.ThunderGroupBox();
             this.airButton15 = new ReaLTaiizor.Controls.AirButton();
-            this.airButton16 = new ReaLTaiizor.Controls.AirButton();
-            this.airButton17 = new ReaLTaiizor.Controls.AirButton();
             this.airButton18 = new ReaLTaiizor.Controls.AirButton();
             this.dataGridViewRelazioni = new System.Windows.Forms.DataGridView();
             this.tabPage1.SuspendLayout();
@@ -855,7 +853,7 @@
             // poisonDateTime1
             // 
             this.poisonDateTime1.Location = new System.Drawing.Point(132, 153);
-            this.poisonDateTime1.MinimumSize = new System.Drawing.Size(0, 29);
+            this.poisonDateTime1.MinimumSize = new System.Drawing.Size(4, 29);
             this.poisonDateTime1.Name = "poisonDateTime1";
             this.poisonDateTime1.Size = new System.Drawing.Size(255, 29);
             this.poisonDateTime1.TabIndex = 12;
@@ -1061,9 +1059,9 @@
             this.thunderGroupBox6.BodyColorB = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.thunderGroupBox6.BodyColorC = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.thunderGroupBox6.BodyColorD = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(58)))));
-            this.thunderGroupBox6.Controls.Add(this.aloneTextBox7);
-            this.thunderGroupBox6.Controls.Add(this.aloneTextBox8);
-            this.thunderGroupBox6.Controls.Add(this.aloneTextBox9);
+            this.thunderGroupBox6.Controls.Add(this.cmb_id_attore_relazione);
+            this.thunderGroupBox6.Controls.Add(this.cmb_id_film_relazione);
+            this.thunderGroupBox6.Controls.Add(this.input_ruolo_relazione);
             this.thunderGroupBox6.Controls.Add(this.airButton13);
             this.thunderGroupBox6.Controls.Add(this.airButton14);
             this.thunderGroupBox6.Controls.Add(this.headerLabel22);
@@ -1077,53 +1075,60 @@
             this.thunderGroupBox6.TabIndex = 5;
             this.thunderGroupBox6.Text = "Info";
             // 
-            // aloneTextBox7
+            // cmb_id_attore_relazione
             // 
-            this.aloneTextBox7.BackColor = System.Drawing.Color.Transparent;
-            this.aloneTextBox7.EnabledCalc = true;
-            this.aloneTextBox7.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.aloneTextBox7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(133)))), ((int)(((byte)(142)))));
-            this.aloneTextBox7.Location = new System.Drawing.Point(132, 114);
-            this.aloneTextBox7.MaxLength = 32767;
-            this.aloneTextBox7.MultiLine = false;
-            this.aloneTextBox7.Name = "aloneTextBox7";
-            this.aloneTextBox7.ReadOnly = false;
-            this.aloneTextBox7.Size = new System.Drawing.Size(255, 29);
-            this.aloneTextBox7.TabIndex = 9;
-            this.aloneTextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.aloneTextBox7.UseSystemPasswordChar = false;
+            this.cmb_id_attore_relazione.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
+            this.cmb_id_attore_relazione.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmb_id_attore_relazione.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmb_id_attore_relazione.DropDownHeight = 100;
+            this.cmb_id_attore_relazione.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_id_attore_relazione.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cmb_id_attore_relazione.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(142)))), ((int)(((byte)(142)))));
+            this.cmb_id_attore_relazione.FormattingEnabled = true;
+            this.cmb_id_attore_relazione.HoverSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.cmb_id_attore_relazione.IntegralHeight = false;
+            this.cmb_id_attore_relazione.ItemHeight = 20;
+            this.cmb_id_attore_relazione.Location = new System.Drawing.Point(132, 31);
+            this.cmb_id_attore_relazione.Name = "cmb_id_attore_relazione";
+            this.cmb_id_attore_relazione.Size = new System.Drawing.Size(255, 26);
+            this.cmb_id_attore_relazione.StartIndex = 0;
+            this.cmb_id_attore_relazione.TabIndex = 18;
+            this.cmb_id_attore_relazione.SelectedIndexChanged += new System.EventHandler(this.comboBoxEdit2_SelectedIndexChanged);
             // 
-            // aloneTextBox8
+            // cmb_id_film_relazione
             // 
-            this.aloneTextBox8.BackColor = System.Drawing.Color.Transparent;
-            this.aloneTextBox8.EnabledCalc = true;
-            this.aloneTextBox8.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.aloneTextBox8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(133)))), ((int)(((byte)(142)))));
-            this.aloneTextBox8.Location = new System.Drawing.Point(132, 75);
-            this.aloneTextBox8.MaxLength = 32767;
-            this.aloneTextBox8.MultiLine = false;
-            this.aloneTextBox8.Name = "aloneTextBox8";
-            this.aloneTextBox8.ReadOnly = false;
-            this.aloneTextBox8.Size = new System.Drawing.Size(255, 29);
-            this.aloneTextBox8.TabIndex = 8;
-            this.aloneTextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.aloneTextBox8.UseSystemPasswordChar = false;
+            this.cmb_id_film_relazione.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
+            this.cmb_id_film_relazione.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmb_id_film_relazione.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmb_id_film_relazione.DropDownHeight = 100;
+            this.cmb_id_film_relazione.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_id_film_relazione.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cmb_id_film_relazione.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(142)))), ((int)(((byte)(142)))));
+            this.cmb_id_film_relazione.FormattingEnabled = true;
+            this.cmb_id_film_relazione.HoverSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.cmb_id_film_relazione.IntegralHeight = false;
+            this.cmb_id_film_relazione.ItemHeight = 20;
+            this.cmb_id_film_relazione.Location = new System.Drawing.Point(132, 78);
+            this.cmb_id_film_relazione.Name = "cmb_id_film_relazione";
+            this.cmb_id_film_relazione.Size = new System.Drawing.Size(255, 26);
+            this.cmb_id_film_relazione.StartIndex = 0;
+            this.cmb_id_film_relazione.TabIndex = 17;
             // 
-            // aloneTextBox9
+            // input_ruolo_relazione
             // 
-            this.aloneTextBox9.BackColor = System.Drawing.Color.Transparent;
-            this.aloneTextBox9.EnabledCalc = false;
-            this.aloneTextBox9.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.aloneTextBox9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(133)))), ((int)(((byte)(142)))));
-            this.aloneTextBox9.Location = new System.Drawing.Point(132, 36);
-            this.aloneTextBox9.MaxLength = 32767;
-            this.aloneTextBox9.MultiLine = false;
-            this.aloneTextBox9.Name = "aloneTextBox9";
-            this.aloneTextBox9.ReadOnly = false;
-            this.aloneTextBox9.Size = new System.Drawing.Size(255, 29);
-            this.aloneTextBox9.TabIndex = 7;
-            this.aloneTextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.aloneTextBox9.UseSystemPasswordChar = false;
+            this.input_ruolo_relazione.BackColor = System.Drawing.Color.Transparent;
+            this.input_ruolo_relazione.EnabledCalc = true;
+            this.input_ruolo_relazione.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.input_ruolo_relazione.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(133)))), ((int)(((byte)(142)))));
+            this.input_ruolo_relazione.Location = new System.Drawing.Point(132, 119);
+            this.input_ruolo_relazione.MaxLength = 32767;
+            this.input_ruolo_relazione.MultiLine = false;
+            this.input_ruolo_relazione.Name = "input_ruolo_relazione";
+            this.input_ruolo_relazione.ReadOnly = false;
+            this.input_ruolo_relazione.Size = new System.Drawing.Size(255, 29);
+            this.input_ruolo_relazione.TabIndex = 9;
+            this.input_ruolo_relazione.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.input_ruolo_relazione.UseSystemPasswordChar = false;
             // 
             // airButton13
             // 
@@ -1153,6 +1158,7 @@
             this.airButton14.TabIndex = 4;
             this.airButton14.Text = "Salva";
             this.airButton14.Transparent = false;
+            this.airButton14.Click += new System.EventHandler(this.airButton14_Click);
             // 
             // headerLabel22
             // 
@@ -1160,7 +1166,7 @@
             this.headerLabel22.BackColor = System.Drawing.Color.Transparent;
             this.headerLabel22.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold);
             this.headerLabel22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.headerLabel22.Location = new System.Drawing.Point(26, 119);
+            this.headerLabel22.Location = new System.Drawing.Point(26, 124);
             this.headerLabel22.Name = "headerLabel22";
             this.headerLabel22.Size = new System.Drawing.Size(53, 18);
             this.headerLabel22.TabIndex = 2;
@@ -1199,8 +1205,6 @@
             this.thunderGroupBox7.BodyColorC = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.thunderGroupBox7.BodyColorD = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(58)))));
             this.thunderGroupBox7.Controls.Add(this.airButton15);
-            this.thunderGroupBox7.Controls.Add(this.airButton16);
-            this.thunderGroupBox7.Controls.Add(this.airButton17);
             this.thunderGroupBox7.Controls.Add(this.airButton18);
             this.thunderGroupBox7.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.thunderGroupBox7.Location = new System.Drawing.Point(23, 200);
@@ -1215,7 +1219,7 @@
             this.airButton15.Customization = "7e3t//Ly8v/r6+v/5ubm/+vr6//f39//p6en/zw8PP8UFBT/gICA/w==";
             this.airButton15.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.airButton15.Image = null;
-            this.airButton15.Location = new System.Drawing.Point(26, 207);
+            this.airButton15.Location = new System.Drawing.Point(26, 148);
             this.airButton15.Name = "airButton15";
             this.airButton15.NoRounding = false;
             this.airButton15.Size = new System.Drawing.Size(229, 45);
@@ -1223,34 +1227,6 @@
             this.airButton15.Text = "Esci";
             this.airButton15.Transparent = false;
             this.airButton15.Click += new System.EventHandler(this.airButton15_Click);
-            // 
-            // airButton16
-            // 
-            this.airButton16.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.airButton16.Customization = "7e3t//Ly8v/r6+v/5ubm/+vr6//f39//p6en/zw8PP8UFBT/gICA/w==";
-            this.airButton16.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.airButton16.Image = null;
-            this.airButton16.Location = new System.Drawing.Point(26, 145);
-            this.airButton16.Name = "airButton16";
-            this.airButton16.NoRounding = false;
-            this.airButton16.Size = new System.Drawing.Size(229, 45);
-            this.airButton16.TabIndex = 2;
-            this.airButton16.Text = "Nuova relazione";
-            this.airButton16.Transparent = false;
-            // 
-            // airButton17
-            // 
-            this.airButton17.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.airButton17.Customization = "7e3t//Ly8v/r6+v/5ubm/+vr6//f39//p6en/zw8PP8UFBT/gICA/w==";
-            this.airButton17.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.airButton17.Image = null;
-            this.airButton17.Location = new System.Drawing.Point(155, 83);
-            this.airButton17.Name = "airButton17";
-            this.airButton17.NoRounding = false;
-            this.airButton17.Size = new System.Drawing.Size(100, 45);
-            this.airButton17.TabIndex = 1;
-            this.airButton17.Text = "Elimina";
-            this.airButton17.Transparent = false;
             // 
             // airButton18
             // 
@@ -1261,9 +1237,9 @@
             this.airButton18.Location = new System.Drawing.Point(26, 83);
             this.airButton18.Name = "airButton18";
             this.airButton18.NoRounding = false;
-            this.airButton18.Size = new System.Drawing.Size(100, 45);
+            this.airButton18.Size = new System.Drawing.Size(229, 45);
             this.airButton18.TabIndex = 0;
-            this.airButton18.Text = "Modifica";
+            this.airButton18.Text = "Abilia nuovo";
             this.airButton18.Transparent = false;
             this.airButton18.Click += new System.EventHandler(this.airButton18_Click);
             // 
@@ -1275,6 +1251,7 @@
             this.dataGridViewRelazioni.RowHeadersWidth = 51;
             this.dataGridViewRelazioni.Size = new System.Drawing.Size(728, 172);
             this.dataGridViewRelazioni.TabIndex = 3;
+            this.dataGridViewRelazioni.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRelazioni_CellContentClick);
             this.dataGridViewRelazioni.SelectionChanged += new System.EventHandler(this.dataGridViewRelazioni_SelectionChanged);
             // 
             // Form1
@@ -1372,9 +1349,7 @@
         private ReaLTaiizor.Controls.AirButton airButton11;
         private ReaLTaiizor.Controls.AirButton airButton12;
         private ReaLTaiizor.Controls.ThunderGroupBox thunderGroupBox6;
-        private ReaLTaiizor.Controls.AloneTextBox aloneTextBox7;
-        private ReaLTaiizor.Controls.AloneTextBox aloneTextBox8;
-        private ReaLTaiizor.Controls.AloneTextBox aloneTextBox9;
+        private ReaLTaiizor.Controls.AloneTextBox input_ruolo_relazione;
         private ReaLTaiizor.Controls.AirButton airButton13;
         private ReaLTaiizor.Controls.AirButton airButton14;
         private ReaLTaiizor.Controls.HeaderLabel headerLabel22;
@@ -1382,13 +1357,13 @@
         private ReaLTaiizor.Controls.HeaderLabel headerLabel24;
         private ReaLTaiizor.Controls.ThunderGroupBox thunderGroupBox7;
         private ReaLTaiizor.Controls.AirButton airButton15;
-        private ReaLTaiizor.Controls.AirButton airButton16;
-        private ReaLTaiizor.Controls.AirButton airButton17;
         private ReaLTaiizor.Controls.AirButton airButton18;
         private ReaLTaiizor.Controls.AirButton airButton7;
         private ReaLTaiizor.Controls.AirButton airButton8;
         private ReaLTaiizor.Controls.PoisonDateTime poisonDateTime1;
         private ReaLTaiizor.Controls.HeaderLabel headerLabel7;
+        private ReaLTaiizor.Controls.ComboBoxEdit cmb_id_attore_relazione;
+        private ReaLTaiizor.Controls.ComboBoxEdit cmb_id_film_relazione;
     }
 }
 

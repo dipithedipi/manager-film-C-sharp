@@ -9,9 +9,12 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.ExceptionServices;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace manager_film
 {
@@ -20,19 +23,24 @@ namespace manager_film
         static string connectionString = "Server=localhost;Database=film;Uid=root;Pwd=;";
         MySqlConnection connection = new MySqlConnection(connectionString);
         List<Generi> generiList = new List<Generi>();
+        List<Attori> attoriList = new List<Attori>();
+        List<Film> filmList = new List<Film>();
+
+
 
         public Form1()
         {
             InitializeComponent();
             UpdateListTable();
             getFilmGenders();
+            UpdateAttoriCmb();
         }
 
         private void getFilmGenders()
         {
             try
             {
-                connection.Open();
+                if (connection.State != ConnectionState.Open) connection.Open();
                 string query = "SELECT * FROM generi";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -72,14 +80,48 @@ namespace manager_film
 
         public void UpdateListTable()
         {
-            try {
-                connection.Open();
+            try
+            {
+                if (connection.State != ConnectionState.Open) connection.Open();
                 string query = "SELECT * FROM film";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(command);
                 System.Data.DataTable dataTable = new System.Data.DataTable();
                 adapter.Fill(dataTable);
                 dataGridView1.DataSource = dataTable;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+
+            }
+
+            try {
+                if (connection.State != ConnectionState.Open) connection.Open();
+                string query = "SELECT * FROM film";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Film film = new Film(
+                        reader.GetInt32("id_film"),
+                        reader.GetString("nome"),
+                        reader.GetString("trama"),
+                        reader.GetTimeSpan("durata"),
+                        reader.GetDateTime("data_uscita"),
+                        reader.GetInt32("id_genere")
+                    );
+
+                    filmList.Add(film);
+                }
+                cmb_id_film_relazione.DataSource = filmList;
+                cmb_id_film_relazione.DisplayMember = "nome"; // This is the property of the Generi class to display
+                cmb_id_film_relazione.ValueMember = "id"; // This is the property of the Generi class to use as the value
 
             } catch (Exception ex) {
                 MessageBox.Show("Error: " + ex.Message);
@@ -89,7 +131,7 @@ namespace manager_film
 
             try
             {
-                connection.Open();
+                if (connection.State != ConnectionState.Open) connection.Open();
                 string query = "SELECT * FROM generi";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(command);
@@ -109,7 +151,7 @@ namespace manager_film
 
             try
             {
-                connection.Open();
+                if (connection.State != ConnectionState.Open) connection.Open();
                 string query = "SELECT * FROM attori";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(command);
@@ -129,7 +171,7 @@ namespace manager_film
 
             try
             {
-                connection.Open();
+                if (connection.State != ConnectionState.Open) connection.Open();
                 string query = "SELECT * FROM recitare";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(command);
@@ -244,7 +286,7 @@ namespace manager_film
                     cmd.Parameters.AddWithValue("@data_uscita", datauscita);
                     cmd.Parameters.AddWithValue("@id_genere", idgenere);
                     cmd.Parameters.AddWithValue("@id_film", id);
-                    if (connection.State != ConnectionState.Open) connection.Open();
+                    if (connection.State != ConnectionState.Open) 
                     cmd.ExecuteNonQuery();
                 }
 
@@ -340,7 +382,7 @@ namespace manager_film
                     using (MySqlCommand cmd = new MySqlCommand(deleteQuery, connection))
                     {
                         cmd.Parameters.AddWithValue("@id_film", idFilmToDelete);
-                        if(connection.State != ConnectionState.Open) connection.Open();
+                        if(connection.State != ConnectionState.Open)  connection.Open();
                         cmd.ExecuteNonQuery();
                     }
 
@@ -469,7 +511,7 @@ namespace manager_film
                     using (MySqlCommand cmd = new MySqlCommand(deleteQuery, connection))
                     {
                         cmd.Parameters.AddWithValue("@id_genere", idToDelete);
-                        if (connection.State != ConnectionState.Open) connection.Open();
+                        if (connection.State != ConnectionState.Open)  connection.Open();
                         cmd.ExecuteNonQuery();
                     }
 
@@ -477,7 +519,7 @@ namespace manager_film
                     using (MySqlCommand cmd = new MySqlCommand(deleteQuery, connection))
                     {
                         cmd.Parameters.AddWithValue("@id_genere", idToDelete);
-                        if (connection.State != ConnectionState.Open) connection.Open();
+                        if (connection.State != ConnectionState.Open)  connection.Open();
                         cmd.ExecuteNonQuery();
                     }
 
@@ -533,11 +575,68 @@ namespace manager_film
             }
         }
 
+        private string AttoreText(int id)
+        {
+            return attoriList[id].Nome;
+        }
+
+
+        private int AttoreId(string nome)
+        {
+            return attoriList.Find(x => x.Nome == nome).IdAttore;
+        }
+
+        private void UpdateAttoriCmb()
+        {
+            try
+            {
+                if (connection.State != ConnectionState.Open) connection.Open();
+                string query = "SELECT * FROM attori";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Attori attore = new Attori
+                    {
+                        IdAttore = reader.GetInt32("id_attore"),
+                        Nome = reader.GetString("nome"),
+                        Cognome = reader.GetString("cognome"),
+                        DataNascita = reader.GetDateTime("data_nascita")
+                    };
+
+                    attoriList.Add(attore);
+                }
+
+                cmb_id_attore_relazione.DataSource = attoriList;
+                cmb_id_attore_relazione.DisplayMember = "Nome"; // This is the property of the Generi class to display
+                cmb_id_attore_relazione.ValueMember = "IdAttore"; // This is the property of the Generi class to use as the value
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        private string FilmText(int id)
+        {
+            return filmList.Find(x => x.id == id).nome;
+        }
+
+        private int FilmId(string name)
+        {
+            return filmList.Find(x => x.nome == name).id;
+        }   
+
         private void dataGridViewRelazioni_SelectionChanged(object sender, EventArgs e)
         {
-            aloneTextBox9.Text = string.Empty;
-            aloneTextBox8.Text = string.Empty;
-            aloneTextBox7.Text = string.Empty;
+            cmb_id_attore_relazione.Text = string.Empty;
+            cmb_id_film_relazione.Text = string.Empty;
+            input_ruolo_relazione.Text = string.Empty;
 
             if (dataGridViewRelazioni.SelectedRows.Count > 0)
             {
@@ -547,9 +646,10 @@ namespace manager_film
                 string id_film = selectedRow.Cells["id_film"].Value.ToString();
                 string ruolo = selectedRow.Cells["ruolo"].Value.ToString();
 
-                aloneTextBox9.Text = id_attore.ToString();
-                aloneTextBox8.Text = id_film.ToString();
-                aloneTextBox7.Text = ruolo.ToString();
+                cmb_id_attore_relazione.Text = AttoreText(int.Parse(id_attore));
+                //MessageBox.Show(FilmText(int.Parse(id_film)));
+                cmb_id_film_relazione.Text = FilmText(int.Parse(id_film));
+                input_ruolo_relazione.Text = ruolo.ToString();
             }
         }
 
@@ -571,6 +671,42 @@ namespace manager_film
         private void airButton13_Click(object sender, EventArgs e)
         {
             thunderGroupBox6.Enabled=false;
+        }
+
+        private void comboBoxEdit2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void airButton14_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (MySqlCommand cmd = new MySqlCommand(
+                    "INSERT INTO recitare (id_attore, id_film, ruolo) VALUES (@id_attore, @id_film, @ruolo)",
+                    connection
+                ))
+                {
+                    cmd.Parameters.AddWithValue("@id_attore", AttoreId(cmb_id_attore_relazione.Text));
+                    cmd.Parameters.AddWithValue("@id_film", FilmId(cmb_id_film_relazione.Text));
+                    cmd.Parameters.AddWithValue("@ruolo", input_ruolo_relazione.Text);
+                    connection.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                UpdateListTable();
+            }
+            catch(Exception ex) { 
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        private void dataGridViewRelazioni_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
